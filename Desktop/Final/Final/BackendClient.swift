@@ -46,7 +46,7 @@ final class BackendClient {
 
     func getEpisodeNotes(_ req: EpisodeNotesRequest) async throws -> EpisodeNotesResponse {
         try await post(path: "/ai/episode_notes", body: req, as: EpisodeNotesResponse.self)
-        print("AI raw:", String(data: data, encoding: .utf8) ?? "nil")
+        
     }
 
     func getRecommendations(_ req: RecommendRequest) async throws -> RecommendResponse {
@@ -64,6 +64,7 @@ final class BackendClient {
         request.httpBody = try JSONEncoder().encode(body)
 
         let (data, response) = try await URLSession.shared.data(for: request)
+        print("RAW \(path):", String(data: data, encoding: .utf8) ?? "nil")
         let code = (response as? HTTPURLResponse)?.statusCode ?? -1
 
         if code < 200 || code >= 300 {
