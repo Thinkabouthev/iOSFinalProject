@@ -35,11 +35,10 @@ final class BackendClient {
         let userNotes: String?
     }
 
-    struct EpisodeNotesResponse: Codable {
+    struct EpisodeNotesResponse: Decodable {
         let summary: String
         let key_points: [String]
         let questions: [String]
-        let next_actions: [String]
     }
 
     // MARK: - Public
